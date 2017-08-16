@@ -1,7 +1,5 @@
 package br.com.digitoglobal.service.basiccontrol;
 
-import br.com.digitoglobal.service.filterControl.DataFilterControlable;
-
 import java.io.File;
 import java.nio.file.Path;
 import java.util.Date;
@@ -12,13 +10,14 @@ import java.util.List;
  */
 public interface DataBasicControlable {
 
-    List<File> list();
-    List<File> find(DataFilterControlable filter);
-    void write(Path path);
-    void writeFile(File file);
+    byte[] toBytes(Path relativePath);
+    void write(byte[] bytes);
+    void write(Path relativePath, byte[] bytes);
     void createFolder(Path path);
     void remove(Path path);
-    void removeCascade(Path path);
+    List<File> list();
+    List<File> list(PathOrder pathOrder);
+    List<File> list(PathOrder pathOrder, PathOrderType pathOrderType);
     Date lastModification(File file);
     Path getBasePath();
 

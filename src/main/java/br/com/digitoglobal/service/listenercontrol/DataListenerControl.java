@@ -25,17 +25,17 @@ public class DataListenerControl extends DataBasicControl {
         this(path, null);
     }
 
-    public DataListenerControl(Path path, DataEvent[] dataEvent) {
+    public DataListenerControl(Path path, DataEvent[] dataEvents) {
         super(path);
         this.dataListenerThreads = new ArrayList<>();
         this.path = path;
         try {
             watchService = FileSystems.getDefault().newWatchService();
 
-            if (dataEvent == null || dataEvent.length == 0) {
+            if (dataEvents == null || dataEvents.length == 0) {
                 watchKey = this.path.register(watchService, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
             } else {
-                List<WatchEvent.Kind<Path>> events = Arrays.stream(dataEvent).map(de -> de.toWatchEventKind()).collect(Collectors.toList());
+                List<WatchEvent.Kind<Path>> events = Arrays.stream(dataEvents).map(de -> de.toWatchEventKind()).collect(Collectors.toList());
                 watchKey = this.path.register(watchService, events.toArray(new WatchEvent.Kind[events.size()]));
             }
         } catch (IOException e) {

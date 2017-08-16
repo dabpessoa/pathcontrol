@@ -1,17 +1,104 @@
 package br.com.digitoglobal.service;
 
+import br.com.digitoglobal.service.basiccontrol.DataBasicControl;
 import br.com.digitoglobal.service.filterControl.DataFilterControl;
 import br.com.digitoglobal.service.filterControl.FilterComparator;
+import br.com.digitoglobal.service.listenercontrol.DataEvent;
 import br.com.digitoglobal.service.listenercontrol.DataListenerControl;
 import br.com.digitoglobal.service.sizecontrol.DataSizeControl;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
  * Created by diego.pessoa on 02/08/2017.
  */
 public class DataControl {
+
+    private DataSizeControl dataSizeControl;
+    private DataFilterControl dataFilterControl;
+    private DataListenerControl dataListenerControl;
+    private DataBasicControl dataBasicControl;
+
+    public DataControl(Path path) {
+        this(path, null, null);
+    }
+
+    public DataControl(Path path, Long pathSizeLimit) {
+        this(path, pathSizeLimit, null);
+    }
+
+    public DataControl(Path path, DataEvent... dataEvents) {
+        this(path, null, dataEvents);
+    }
+
+    public DataControl(Path path, Long pathSizeLimit, DataEvent[] dataEvents) {
+        this.dataBasicControl = new DataBasicControl(path);
+        this.dataSizeControl = new DataSizeControl(path, pathSizeLimit);
+        this.dataFilterControl = new DataFilterControl(path);
+        this.dataListenerControl = new DataListenerControl(path, dataEvents);
+    }
+
+    public void createFile(File file) {
+        getDataBasicControl().writeFile(file);
+    }
+
+    public void listFilesFromBasePath() {
+        getDataBasicControl().list();
+    }
+
+    public List<File> filter(String name) {
+        return getDataFilterControl().filterFolder(name, true, FilterComparator.CONTAINS);
+    }
+
+    public long freeSpace() {
+        return getDataSizeControl().freeSpace();
+    }
+
+    public long usedSpace() {
+        return getDataSizeControl().usedSpace();
+    }
+
+    public long sizeLimit() {
+        return getDataSizeControl().getLimit();
+    }
+
+    public boolean hasFreeSpace() {
+        return getDataSizeControl().hasFreeSpace();
+    }
+
+    public DataSizeControl getDataSizeControl() {
+        return dataSizeControl;
+    }
+
+    public void setDataSizeControl(DataSizeControl dataSizeControl) {
+        this.dataSizeControl = dataSizeControl;
+    }
+
+    public DataFilterControl getDataFilterControl() {
+        return dataFilterControl;
+    }
+
+    public void setDataFilterControl(DataFilterControl dataFilterControl) {
+        this.dataFilterControl = dataFilterControl;
+    }
+
+    public DataListenerControl getDataListenerControl() {
+        return dataListenerControl;
+    }
+
+    public void setDataListenerControl(DataListenerControl dataListenerControl) {
+        this.dataListenerControl = dataListenerControl;
+    }
+
+    public DataBasicControl getDataBasicControl() {
+        return dataBasicControl;
+    }
+
+    public void setDataBasicControl(DataBasicControl dataBasicControl) {
+        this.dataBasicControl = dataBasicControl;
+    }
 
     public static void main(String[] args) {
 
