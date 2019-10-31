@@ -7,5 +7,5 @@ public interface DataSizeControlable {
     boolean hasFreeSpace();
     long freeSpace();
     long usedSpace();
-    void setLimit(long limit);
+    void setLimit(Long limit);
 }

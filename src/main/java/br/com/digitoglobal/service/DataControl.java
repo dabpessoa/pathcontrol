@@ -44,8 +44,8 @@ public class DataControl {
         getDataBasicControl().write(file.toPath());
     }
 
-    public void listFilesFromBasePath() {
-        getDataBasicControl().list();
+    public List<File> listFilesFromBasePath() {
+    	return getDataBasicControl().list();
     }
 
     public List<File> filter(String name) {

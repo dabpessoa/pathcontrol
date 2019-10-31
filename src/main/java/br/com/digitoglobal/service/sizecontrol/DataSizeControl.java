@@ -7,7 +7,7 @@ import java.nio.file.Path;
  */
 public class DataSizeControl extends AbstractDataSizeControl {
 
-    public DataSizeControl(Path basePath, long limit) {
+    public DataSizeControl(Path basePath, Long limit) {
         super(basePath, limit);
     }
 

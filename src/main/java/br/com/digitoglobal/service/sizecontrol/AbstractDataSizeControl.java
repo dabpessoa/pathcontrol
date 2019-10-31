@@ -9,19 +9,19 @@ import java.nio.file.Path;
  */
 public abstract class AbstractDataSizeControl extends DataBasicControl implements DataSizeControlable {
 
-    private long limit;
+    private Long limit;
 
-    public AbstractDataSizeControl(Path basePath, long limit) {
+    public AbstractDataSizeControl(Path basePath, Long limit) {
         super(basePath);
         setLimit(limit);
     }
 
     @Override
-    public void setLimit(long limit) {
+    public void setLimit(Long limit) {
         this.limit = limit;
     }
 
-    public long getLimit() {
+    public Long getLimit() {
         return limit;
     }
 
