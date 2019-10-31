@@ -41,7 +41,7 @@ public class DataControl {
     }
 
     public void createFile(File file) {
-        getDataBasicControl().writeFile(file);
+        getDataBasicControl().write(file.toPath());
     }
 
     public void listFilesFromBasePath() {
@@ -102,7 +102,9 @@ public class DataControl {
 
     public static void main(String[] args) {
 
-        DataSizeControl dsc = new DataSizeControl(new File("C:\\Users\\diego.pessoa\\Desktop\\teste").toPath(), 533352);
+        String camiho = "C:/Users/dabpessoa/Desktop/teste";
+
+        DataSizeControl dsc = new DataSizeControl(new File(camiho).toPath(), 533352);
 
         System.out.println(dsc.getBasePath().toFile().getAbsolutePath());
         System.out.println(dsc.getBasePath().getFileName());
@@ -110,7 +112,7 @@ public class DataControl {
         System.out.println(dsc.freeSpace());
         System.out.println(dsc.hasFreeSpace());
 
-        DataFilterControl dfc = new DataFilterControl(new File("C:\\Users\\diego.pessoa\\Desktop\\teste").toPath());
+        DataFilterControl dfc = new DataFilterControl(new File(camiho).toPath());
 
         List<File> files = dfc.filterFile("net", true, FilterComparator.CONTAINS);
         files.forEach(f -> System.out.println("Found File: "+ f.getAbsolutePath()));
@@ -123,7 +125,7 @@ public class DataControl {
         System.out.println();
         System.out.println();
 
-        DataListenerControl dlc = new DataListenerControl(new File("C:\\Users\\diego.pessoa\\Desktop\\teste").toPath());
+        DataListenerControl dlc = new DataListenerControl(new File(camiho).toPath());
         dlc.registerListener((path, event) -> {
             System.out.println("Path Event: "+path.toFile().getAbsolutePath());
             System.out.println("EVENT: "+event.name());

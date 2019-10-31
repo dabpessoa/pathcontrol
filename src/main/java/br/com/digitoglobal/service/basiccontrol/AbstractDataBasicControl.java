@@ -45,6 +45,11 @@ public abstract class AbstractDataBasicControl implements DataBasicControlable {
     }
 
     @Override
+    public void write(Path relativePath) {
+        write(toBytes(relativePath));
+    }
+
+    @Override
     public void write(byte[] bytes) {
         write(null, bytes);
     }

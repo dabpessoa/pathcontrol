@@ -12,6 +12,7 @@ public interface DataBasicControlable {
 
     byte[] toBytes(Path relativePath);
     void write(byte[] bytes);
+    void write(Path relativePath);
     void write(Path relativePath, byte[] bytes);
     void createFolder(Path path);
     void remove(Path path);
