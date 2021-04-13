@@ -104,7 +104,7 @@ public class DataControl {
 
         String camiho = "C:/Users/dabpessoa/Desktop/teste";
 
-        DataSizeControl dsc = new DataSizeControl(new File(camiho).toPath(), 533352);
+        DataSizeControl dsc = new DataSizeControl(new File(camiho).toPath(), 533352l);
 
         System.out.println(dsc.getBasePath().toFile().getAbsolutePath());
         System.out.println(dsc.getBasePath().getFileName());

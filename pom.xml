@@ -3,18 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>br.com.digitoglobal</groupId>
+    <packaging>${packaging}</packaging>
+
+	<description>PathControl</description>
+	<url>http://www.pathcontrol.com.br</url>
+	<name>PathControl</name>
+	
     <artifactId>pathControl</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <developers>
-        <developer>
-            <name>Diego Pessoa</name>
-            <email>dabpessoa@gmail.com</email>
-            <url>www.dabpessoa.me</url>
-        </developer>
-    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,6 +21,29 @@
         <web.version>3.1</web.version>
         <project.finalName>${project.artifactId}</project.finalName>
     </properties>
+
+	<profiles>
+		<profile>
+			<id>desv</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profile>desenvolvimento</profile>
+				<packaging>jar</packaging>
+				<finalName>${project.artifactId}</finalName>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profile>producao</profile>
+				<packaging>jar</packaging>
+				<finalName>${project.artifactId}-${profile}-${project.version}</finalName>
+			</properties>
+		</profile>
+	</profiles>
 
     <repositories>
 
@@ -122,5 +142,13 @@
         </plugins>
 
     </build>
+
+	<developers>
+        <developer>
+            <name>Diego Pessoa</name>
+            <email>dabpessoa@gmail.com</email>
+            <url>www.dabpessoa.me</url>
+        </developer>
+    </developers>
 
 </project>
